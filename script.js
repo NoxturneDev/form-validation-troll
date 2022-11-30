@@ -17,37 +17,46 @@ function validateForm() {
     valid = true
 }
 
-function getButtonWrapperBoundaries(mouse) {
-    const { clientX, clientY } = mouse
+function getButtonWrapperBoundaries() {
     const buttonWrapper = doc.querySelector('.button-wrapper')
     const rect = buttonWrapper.getBoundingClientRect()
 
-    const C_X = clientX,
-        C_Y = clientY,
-        R_X = rect.x,
-        R_Y = rect.y,
-        R_W = rect.width,
-        R_H = rect.height
-
-    if (C_X > R_X && C_X < R_X + R_W && C_Y > R_Y && C_Y < R_H + R_Y) {
-        return true
+    return {
+        x: rect.x, y: rect.y, w: rect.width
     }
-
-    return false
 }
 
 function moveButton() {
-    const rect = btn.getBoundingClientRect()
-
     const currStyle = getComputedStyle(btn)
     const currentLeft = currStyle.left
+    const direction = {
+        left: `${parseInt(currentLeft) + 50}px`,
+        right: `${parseInt(currentLeft) - 50}px`
+    }
+
+    const boundaries = getButtonWrapperBoundaries()
+    const rect = btn.getBoundingClientRect()
+
 
     if (mousePost.x - rect.x <= rect.width / 2) {
-        btn.style.left = `${parseInt(currentLeft) + 50}px`
+        if (rect.x >= boundaries.x + boundaries.w - 90) {
+            btn.style.left = direction.right
+            return
+        } else {
+            btn.style.left = direction.left
+            return
+        }
     } else {
-        btn.style.left = `${parseInt(currentLeft) - 50}px`
+        if (rect.x <= boundaries.x + 50) {
+            btn.style.left = direction.left
+            return
+        } else {
+            btn.style.left = direction.right
+            return
+        }
     }
 }
+
 
 btn.addEventListener('mouseenter', () => {
     if (valid) return
