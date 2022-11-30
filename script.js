@@ -1,20 +1,36 @@
 const doc = window.document
+const container = doc.querySelector('.main-wrapper')
 const btn = doc.getElementById('btn-submit')
 const password = doc.getElementById('password')
 const username = doc.getElementById('name')
+const toastDanger = doc.getElementById('toast-danger')
+const toastSuccess = doc.getElementById('toast-success')
 
 const mousePost = { x: 0, y: 0 }
-let valid = false
+let valid = undefined
 
 function validateForm() {
     if (username.value != "galih adhi kusuma" || password.value != "galih123") {
 
-        console.log('salah')
         valid = false
+        container.style.backgroundColor = "#f23729"
+        toastDanger.hidden = false
+        toastSuccess.hidden = true
         return
     }
 
+    toastSuccess.hidden = false
+    toastDanger.hidden = true
+    container.style.backgroundColor = "limegreen"
     valid = true
+}
+
+let treshold;
+function debounceFunction(timeout) {
+    clearTimeout(treshold)
+    treshold = setTimeout(() => {
+        validateForm()
+    }, timeout)
 }
 
 function getButtonWrapperBoundaries() {
@@ -65,8 +81,12 @@ btn.addEventListener('mouseenter', () => {
     moveButton()
 })
 
-username.addEventListener('keydown', validateForm)
-password.addEventListener('keydown', validateForm)
+username.addEventListener('keydown', () => {
+    debounceFunction(300)
+})
+password.addEventListener('keydown', () => {
+    debounceFunction(300)
+})
 
 window.addEventListener('mousemove', (e) => {
     mousePost.x = e.clientX
