@@ -22,6 +22,7 @@ function validateForm() {
     toastSuccess.hidden = false
     toastDanger.hidden = true
     container.style.backgroundColor = "limegreen"
+    btn.innerText = "Submit! 👌"
     valid = true
 }
 
@@ -55,6 +56,7 @@ function moveButton() {
 
 
     if (mousePost.x - rect.x <= rect.width / 2) {
+        btn.innerText = "ea gabisa 🤣"
         if (rect.x >= boundaries.x + boundaries.w - 90) {
             btn.style.left = direction.right
             return
@@ -63,6 +65,7 @@ function moveButton() {
             return
         }
     } else {
+        btn.innerText = "ea gabisa 🤣"
         if (rect.x <= boundaries.x + 50) {
             btn.style.left = direction.left
             return
@@ -76,7 +79,6 @@ function moveButton() {
 
 btn.addEventListener('mouseenter', () => {
     if (valid) return
-    console.log(valid)
 
     moveButton()
 })
