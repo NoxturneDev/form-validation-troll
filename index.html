@@ -17,22 +17,22 @@
 <body>
     <main class="main-wrapper">
         <div class="toast-container">
-            <h1 id="toast-danger">
-                SALAH WOEEE 😡💢
+            <h1 id="toast-danger" hidden="true">
+                😡💢
             </h1>
-            <h1 id="toast-success">
-                NAH BENER 🤗👌
+            <h1 id="toast-success" hidden="false">
+                🤗👌
             </h1>
         </div>
         <form action="POST" id="form" class="form">
             <label for="" class="input-group">
-                name
-                <input type="text" name="name" id="name">
+                <span>name</span>
             </label>
-            <label for="">
+            <input type="text" class="input" name="name" id="name">
+            <label for="" class="input-group">
                 password
-                <input type="password" name="password" id="password">
             </label>
+            <input type="password" class="input" name="password" id="password">
             <div class="button-wrapper">
                 <button id="btn-submit">
                     Submit!
