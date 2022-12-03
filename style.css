@@ -72,6 +72,10 @@
     font-size: 1rem;
 }
 
+#name{
+    color: red;
+}
+
 .button-wrapper{
     position: relative;
     width: 100%;
